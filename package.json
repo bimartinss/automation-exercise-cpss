@@ -1,0 +1,13 @@
+{
+  "name": "automation-exercise-cypress",
+  "version": "1.0.0",
+  "description": "Trabalho de testes automatizados com Cypress",
+  "scripts": {
+    "test": "cypress run",
+    "test:open": "cypress open"
+  },
+  "devDependencies": {
+    "cypress": "^13.17.0",
+    "cypress-mochawesome-reporter": "^3.8.2"
+  }
+}
