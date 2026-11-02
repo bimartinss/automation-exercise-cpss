@@ -1,19 +1,23 @@
+let emailCadastro = "";
+
 describe("Automation Exercise", () => {
+  const senhaCadastro = "Teste123";
+
   beforeEach(() => {
     cy.visit("/");
   });
 
   it("TC01 - Register User", () => {
-    const email = `teste${Date.now()}@email.com`;
+    emailCadastro = `teste${Date.now()}@email.com`;
 
     cy.contains("Signup / Login").click();
     cy.get('[data-qa="signup-name"]').type("Teste Cypress");
-    cy.get('[data-qa="signup-email"]').type(email);
+    cy.get('[data-qa="signup-email"]').type(emailCadastro);
     cy.get('[data-qa="signup-button"]').click();
 
     cy.contains("Enter Account Information").should("be.visible");
     cy.get("#id_gender1").check({ force: true });
-    cy.get('[data-qa="password"]').type("Teste123");
+    cy.get('[data-qa="password"]').type(senhaCadastro);
     cy.get('[data-qa="days"]').select("10");
     cy.get('[data-qa="months"]').select("May");
     cy.get('[data-qa="years"]').select("1995");
@@ -33,8 +37,8 @@ describe("Automation Exercise", () => {
 
   it("TC02 - Login User with correct email and password", () => {
     cy.contains("Signup / Login").click();
-    cy.get('[data-qa="login-email"]').type("email.teste@email.com");
-    cy.get('[data-qa="login-password"]').type("Teste123");
+    cy.get('[data-qa="login-email"]').type(emailCadastro);
+    cy.get('[data-qa="login-password"]').type(senhaCadastro);
     cy.get('[data-qa="login-button"]').click();
     cy.contains("Logged in as").should("be.visible");
   });
@@ -49,8 +53,8 @@ describe("Automation Exercise", () => {
 
   it("TC04 - Logout User", () => {
     cy.contains("Signup / Login").click();
-    cy.get('[data-qa="login-email"]').type("email.teste@email.com");
-    cy.get('[data-qa="login-password"]').type("Teste123");
+    cy.get('[data-qa="login-email"]').type(emailCadastro);
+    cy.get('[data-qa="login-password"]').type(senhaCadastro);
     cy.get('[data-qa="login-button"]').click();
     cy.contains("Logged in as").should("be.visible");
     cy.contains("Logout").click();
@@ -60,7 +64,7 @@ describe("Automation Exercise", () => {
   it("TC05 - Register User with existing email", () => {
     cy.contains("Signup / Login").click();
     cy.get('[data-qa="signup-name"]').type("Teste Cypress");
-    cy.get('[data-qa="signup-email"]').type("email.teste@email.com");
+    cy.get('[data-qa="signup-email"]').type(emailCadastro);
     cy.get('[data-qa="signup-button"]').click();
     cy.contains("Email Address already exist!").should("be.visible");
   });
@@ -89,13 +93,13 @@ describe("Automation Exercise", () => {
   });
 
   it("TC15 - Place Order: Register before Checkout", () => {
-    const email = `pedido${Date.now()}@email.com`;
+    const emailPedido = `pedido${Date.now()}@email.com`;
     cy.contains("Signup / Login").click();
     cy.get('[data-qa="signup-name"]').type("Teste Pedido");
-    cy.get('[data-qa="signup-email"]').type(email);
+    cy.get('[data-qa="signup-email"]').type(emailPedido);
     cy.get('[data-qa="signup-button"]').click();
     cy.get("#id_gender1").check({ force: true });
-    cy.get('[data-qa="password"]').type("Teste123");
+    cy.get('[data-qa="password"]').type(senhaCadastro);
     cy.get('[data-qa="days"]').select("10");
     cy.get('[data-qa="months"]').select("May");
     cy.get('[data-qa="years"]').select("1995");
@@ -117,8 +121,8 @@ describe("Automation Exercise", () => {
 
   it("TC16 - Place Order: Login before Checkout", () => {
     cy.contains("Signup / Login").click();
-    cy.get('[data-qa="login-email"]').type("email.teste@email.com");
-    cy.get('[data-qa="login-password"]').type("Teste123");
+    cy.get('[data-qa="login-email"]').type(emailCadastro);
+    cy.get('[data-qa="login-password"]').type(senhaCadastro);
     cy.get('[data-qa="login-button"]').click();
     cy.contains("Logged in as").should("be.visible");
     cy.contains("Add to cart").first().click();
